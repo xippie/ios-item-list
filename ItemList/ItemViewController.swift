@@ -23,14 +23,11 @@ class ItemViewController: UIViewController {
         self.itemTableView.register(UINib(nibName: "ItemImgViewCell", bundle: nil), forCellReuseIdentifier: "itemImgCell")
     }
     
-//    func prepareCell(withItem item: Item, forRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if item.image == "" {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemViewCell
-//        } else {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "itemImgCell", for: indexPath) as! ItemImgViewCell
-//        }
-//    }
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailViewController = segue.destination as! DetailViewController
+        let item: Item = sender as! Item
+        detailViewController.item = item
+    }
 }
 
 extension ItemViewController: ItemPresenterDelegate {
@@ -70,6 +67,4 @@ extension ItemViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "detail", sender: self.itemArray[indexPath.row])
     }
-    
-    
 }
