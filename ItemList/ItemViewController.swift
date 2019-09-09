@@ -17,10 +17,12 @@ class ItemViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter = ItemPresenter(delegate: self)
-        self.presenter.getItems(withURL: url)
         self.itemTableView.register(UINib(nibName: "ItemViewCell", bundle: nil), forCellReuseIdentifier: "itemCell")
         self.itemTableView.register(UINib(nibName: "ItemImgViewCell", bundle: nil), forCellReuseIdentifier: "itemImgCell")
+        self.itemTableView.dataSource = self
+        self.itemTableView.delegate = self
+        self.presenter = ItemPresenter(delegate: self)
+        self.presenter.getItems(withURL: url)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -28,13 +30,30 @@ class ItemViewController: UIViewController {
         let item: Item = sender as! Item
         detailViewController.item = item
     }
+    
+    func prepareCell(withItem item: Item, forRowAt indexPath: IndexPath) -> UITableViewCell {
+        if item.image == "" {
+            let cell = self.itemTableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemViewCell
+            cell.itemTitle.text = item.title != "" ? item.title : "No title"
+            cell.itemDescription.text = item.description != "" ? item.description : "No description"
+            return cell
+        } else {
+            let cell = self.itemTableView.dequeueReusableCell(withIdentifier: "itemImgCell", for: indexPath) as! ItemImgViewCell
+            if let imageURL = URL(string: item.image), let placeholder = UIImage(named: "image-not-found") {
+                cell.itemImage.af_setImage(withURL: imageURL, placeholderImage: placeholder)
+            }
+            cell.itemTitle.text = item.title != "" ? item.title : "No title"
+            cell.itemDescription.text = item.description != "" ? item.description : "No description"
+            return cell
+        }
+    }
 }
 
 extension ItemViewController: ItemPresenterDelegate {
     func getItemsDidFinished(items: Array<Item>) {
         self.itemArray = items
         self.itemTableView.rowHeight = UITableView.automaticDimension
-        self.itemTableView.estimatedRowHeight = 80
+        self.itemTableView.estimatedRowHeight = 100
         self.itemTableView.reloadData()
     }
 }
@@ -46,21 +65,8 @@ extension ItemViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = self.itemArray[indexPath.row]
-        
-        if item.image == "" {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemViewCell
-            cell.itemTitle.text = item.title != "" ? item.title : "No title"
-            cell.itemDescription.text = item.description != "" ? item.description : "No description"
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "itemImgCell", for: indexPath) as! ItemImgViewCell
-            if let imageURL = URL(string: item.image), let placeholder = UIImage(named: "image-not-found") {
-                cell.itemImage.af_setImage(withURL: imageURL, placeholderImage: placeholder)
-            }
-            cell.itemTitle.text = item.title != "" ? item.title : "No title"
-            cell.itemDescription.text = item.description != "" ? item.description : "No description"
-            return cell
-        }
+        return self.prepareCell(withItem: item, forRowAt: indexPath)
+
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
