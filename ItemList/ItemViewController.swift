@@ -48,15 +48,26 @@ extension ItemViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = self.itemArray[indexPath.row]
+        
         if item.image == "" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemViewCell
             cell.itemTitle.text = item.title != "" ? item.title : "No title"
             cell.itemDescription.text = item.description != "" ? item.description : "No description"
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "itemImgCell", for: indexPath) as! ItemImgViewCell
+            if let imageURL = URL(string: item.image), let placeholder = UIImage(named: "image-not-found") {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "itemImgCell", for: indexPath) as! ItemImgViewCell
+                cell.itemImage.af_setImage(withURL: imageURL, placeholderImage: placeholder)
+            }
+            cell.itemTitle.text = item.title != "" ? item.title : "No title"
+            cell.itemDescription.text = item.description != "" ? item.description : "No description"
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "detail", sender: self.itemArray[indexPath.row])
     }
     
     
