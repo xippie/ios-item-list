@@ -52,7 +52,7 @@ class ItemViewController: UIViewController {
 extension ItemViewController: ItemPresenterDelegate {
     func getItemsDidFinished(items: Array<Item>) {
         self.itemArray = items
-        self.itemTableView.rowHeight = UITableView.automaticDimension
+        self.itemTableView.rowHeight = UITableViewAutomaticDimension
         self.itemTableView.estimatedRowHeight = 100
         self.itemTableView.reloadData()
     }
