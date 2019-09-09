@@ -34,7 +34,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="List of items" id="e29-WZ-Z4r"/>
                     <connections>
-                        <outlet property="itemsTableView" destination="sBj-vy-uis" id="x0z-fJ-f4b"/>
+                        <outlet property="itemTableView" destination="sBj-vy-uis" id="eP1-zQ-Vcw"/>
                         <segue destination="xlD-Jf-vQO" kind="show" identifier="detail" id="GrL-0c-fJC"/>
                     </connections>
                 </viewController>
