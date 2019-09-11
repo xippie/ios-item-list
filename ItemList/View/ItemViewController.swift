@@ -57,7 +57,7 @@ extension ItemViewController: ItemPresenterDelegate {
             self.present(alert, animated: true)
         }
         self.itemArray = items
-        self.itemTableView.rowHeight = UITableView.automaticDimension
+        self.itemTableView.rowHeight = UITableViewAutomaticDimension
         self.itemTableView.estimatedRowHeight = 100
         self.itemTableView.reloadData()
     }
