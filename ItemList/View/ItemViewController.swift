@@ -51,6 +51,11 @@ class ItemViewController: UIViewController {
 
 extension ItemViewController: ItemPresenterDelegate {
     func getItemsDidFinished(items: Array<Item>) {
+        if items.count == 0 {
+            let alert = UIAlertController(title: "No results", message: "There is no items available", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
         self.itemArray = items
         self.itemTableView.rowHeight = UITableView.automaticDimension
         self.itemTableView.estimatedRowHeight = 100

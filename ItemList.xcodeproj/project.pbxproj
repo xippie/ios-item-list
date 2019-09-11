@@ -78,21 +78,61 @@
 			isa = PBXGroup;
 			children = (
 				658A64D12326B0E8009E427D /* AppDelegate.swift */,
-				658A64E72326B19A009E427D /* ItemViewController.swift */,
-				658A64E92326B1B3009E427D /* DetailViewController.swift */,
 				658A64D52326B0E8009E427D /* Main.storyboard */,
 				658A64D82326B0E9009E427D /* Assets.xcassets */,
 				658A64DA2326B0E9009E427D /* LaunchScreen.storyboard */,
 				658A64DD2326B0E9009E427D /* Info.plist */,
-				658A64E32326B16B009E427D /* Item.swift */,
-				658A64E52326B178009E427D /* ItemPresenter.swift */,
-				65E773472326B7C30079BC79 /* ItemService.swift */,
-				658A64EF2326B1FD009E427D /* ItemViewCell.swift */,
-				658A64F02326B1FD009E427D /* ItemViewCell.xib */,
-				658A64F32326B20D009E427D /* ItemImgViewCell.swift */,
-				658A64F42326B20D009E427D /* ItemImgViewCell.xib */,
+				65CD01A023287220004F63DF /* View */,
+				65CD01A123287226004F63DF /* Presenter */,
+				65CD019F23287210004F63DF /* Model */,
+				65CD01A223287237004F63DF /* Service */,
 			);
 			path = ItemList;
+			sourceTree = "<group>";
+		};
+		65CD019F23287210004F63DF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				658A64E32326B16B009E427D /* Item.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		65CD01A023287220004F63DF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				65CD01A323287255004F63DF /* XIB */,
+				658A64E72326B19A009E427D /* ItemViewController.swift */,
+				658A64E92326B1B3009E427D /* DetailViewController.swift */,
+				658A64EF2326B1FD009E427D /* ItemViewCell.swift */,
+				658A64F32326B20D009E427D /* ItemImgViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		65CD01A123287226004F63DF /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				658A64E52326B178009E427D /* ItemPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		65CD01A223287237004F63DF /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				65E773472326B7C30079BC79 /* ItemService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		65CD01A323287255004F63DF /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				658A64F02326B1FD009E427D /* ItemViewCell.xib */,
+				658A64F42326B20D009E427D /* ItemImgViewCell.xib */,
+			);
+			path = XIB;
 			sourceTree = "<group>";
 		};
 		9858DFF16E45669C96475AFD /* Pods */ = {

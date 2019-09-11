@@ -14,13 +14,16 @@ class ItemService {
     var json: JSON!
     
     func getItems(withURL url: String, completion: @escaping (JSON) -> Void) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         Alamofire.request(url).responseJSON { response in
             switch response.result {
             case .success(let data):
                 completion(JSON(data))
             case .failure(let error):
                 print(error.localizedDescription)
+                completion(JSON([]))
             }
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
     }
 }
